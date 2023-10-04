@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getItems } from 'selectors/itemsSelector';
+import { getSongs } from 'models/song/selectors/SongsSelector';
+import { addSong } from 'models/song/slices/songsSlice';
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
 
 import styles from './AddSong.module.scss';
-import { addSong } from 'store/slices/songsSlice/songsSlice';
 
 import { Button } from 'react-bootstrap';
 import ModalCmp from 'components/Modal/Modal';
@@ -16,8 +16,8 @@ import FormCmp from 'components/Form/Form';
 const AddSong = () => {
   const dispatch = useDispatch();
 
-  const items = useSelector(getItems);
-  const initialId = items.length > 0 ? items[items.length - 1].id : 0;
+  const songs = useSelector(getSongs);
+  const initialId = songs.length > 0 ? songs[songs.length - 1].id : 0;
   const [currentId, setCurrentId] = useState(initialId);
 
   const [formValues, setFormValues] = useState({
@@ -35,10 +35,10 @@ const AddSong = () => {
 
   const [errors, setErrors] = useState(newErrors);
 
-  const [show, setShow] = useState(false);
+  const [isShow, setIsShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleOpen = () => setShow(true);
+  const handleClose = () => setIsShow(false);
+  const handleOpen = () => setIsShow(true);
 
   const handleInputChange = (e: {
     target: { name: string; value: string };
@@ -81,7 +81,7 @@ const AddSong = () => {
     setFormValues({ id: 0, author: '', title: '', linkOnYouTube: '' });
     setErrors({ errorAuthor: '', errorTitle: '', errorLink: '' });
     setCurrentId(currentId + 1);
-    setShow(false);
+    setIsShow(false);
   };
 
   return (
@@ -90,10 +90,10 @@ const AddSong = () => {
         Добавить
       </Button>
       <ModalCmp
-        show={show}
+        show={isShow}
         isForm={true}
         handleClose={handleClose}
-        modalSubmitBtn={handleFormSubmit}
+        handleSubmit={handleFormSubmit}
         title={'Новое произведение'}
         btnCancelText={'Отмена'}
         btnSubmitText={'Добавить'}

@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 import { Button } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs';
-
 import ModalCmp from 'components/Modal/Modal';
 
 import styles from './Song.module.scss';
@@ -44,7 +43,7 @@ const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
         title={'Просмотр'}
         btnCancelText={'Закрыть'}
         show={show}
-        modalSubmitBtn={undefined}
+        handleSubmit={undefined}
         btnSubmitText={undefined}
       >
         {linkOnYouTube ? (

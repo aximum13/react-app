@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { save } from 'redux-localstorage-simple';
 
-import reducer from './slices/songsSlice/songsSlice';
+import reducer from '../models/song/slices/songsSlice';
 
 const saveSong = save({
   namespace: 'musicList',

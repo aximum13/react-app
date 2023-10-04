@@ -1,29 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { load } from 'redux-localstorage-simple';
 
-let ITEMS = load({ namespace: 'musicList' });
+import { SongsState, Song, LocalStorageState } from 'models/song/types/types';
 
-if (!ITEMS || !ITEMS.items || !ITEMS.items.length) {
-  ITEMS = {
-    items: [],
+let SONGS = load({ namespace: 'musicList' }) as LocalStorageState;
+
+if (!SONGS || !SONGS.songs || !SONGS.songs.length) {
+  SONGS = {
+    songs: [],
   };
 }
 
+const initialState: SongsState = {
+  songs: SONGS.songs,
+};
+
 export const songsSlice = createSlice({
   name: 'songs',
-  initialState: ITEMS,
+  initialState,
   reducers: {
     addSong: (state, action) => {
-      const newSong = {
+      const newSong: Song = {
         id: action.payload.id,
         author: action.payload.author,
         title: action.payload.title,
         linkOnYouTube: action.payload.linkOnYouTube,
       };
 
-      state.items.push(newSong);
-
-      console.log(state.items, state, ITEMS, newSong);
+      state.songs.push(newSong);
 
       return state;
     },

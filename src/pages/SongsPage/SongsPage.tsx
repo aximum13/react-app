@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { getItems } from 'selectors/itemsSelector';
+import { getSongs } from 'models/song/selectors/SongsSelector';
 import { isItems } from 'utils/isItems';
 
 import AddSong from 'pages/SongsPage/AddSong/AddSong';
@@ -8,7 +8,7 @@ import SongsList from 'pages/SongsPage/SongsList/SongsList';
 import Title from 'components/Title/Title';
 
 const SongsPage = () => {
-  const items = useSelector(getItems);
+  const items = useSelector(getSongs);
   return (
     <>
       <Title />

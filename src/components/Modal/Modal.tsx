@@ -5,7 +5,7 @@ const ModalCmp = ({
   children,
   isForm,
   title,
-  modalSubmitBtn,
+  handleSubmit,
   btnCancelText,
   btnSubmitText,
   show,
@@ -22,7 +22,7 @@ const ModalCmp = ({
           {btnCancelText}
         </Button>
         {isForm && (
-          <Button variant="primary" onClick={modalSubmitBtn}>
+          <Button variant="primary" onClick={handleSubmit}>
             {btnSubmitText}
           </Button>
         )}
