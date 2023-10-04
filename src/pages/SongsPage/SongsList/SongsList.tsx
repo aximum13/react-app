@@ -1,16 +1,15 @@
 import { useSelector } from 'react-redux';
 
 import { getItems } from 'selectors/itemsSelector';
+import Song from '../Song/Song';
 
-import Item from 'components/Item/Item';
+import styles from './SongsList.module.scss';
 
-import styles from './List.module.scss';
-
-const List = () => {
+const SongsList = () => {
   const items = useSelector(getItems);
 
   return (
-    <ul className={styles.List}>
+    <ul className={styles.SongsList}>
       {items.map(
         (
           item: {
@@ -21,7 +20,7 @@ const List = () => {
           },
           index: number
         ) => (
-          <Item
+          <Song
             id={item.id}
             index={index}
             key={item.id}
@@ -35,4 +34,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default SongsList;

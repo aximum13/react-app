@@ -1,13 +1,12 @@
 import classNames from 'classnames';
-
-import Content from 'components/Content';
+import SongsPage from 'pages/SongsPage/SongsPage';
 
 import './styles/app.scss';
 
 function App() {
   return (
     <div className={classNames('App', 'container')}>
-      <Content />
+      <SongsPage />
     </div>
   );
 }
