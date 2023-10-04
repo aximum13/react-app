@@ -31,11 +31,20 @@ export const songsSlice = createSlice({
 
       return state;
     },
+    editSong: (state, action) => {
+      state.songs.map((song: Song) => {
+        if (song.id === action.payload.id) {
+          song.author = action.payload.author;
+          song.title = action.payload.title;
+          song.linkOnYouTube = action.payload.linkOnYouTube;
+        }
+      });
+    },
   },
 });
 
 const { actions, reducer } = songsSlice;
 
-export const { addSong } = actions;
+export const { addSong, editSong } = actions;
 
 export default reducer;
