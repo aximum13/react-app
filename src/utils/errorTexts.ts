@@ -1,4 +1,4 @@
-export const errorTexts = (author, title, link) => {
+export const errorTexts = (author: string, title: string, link?: string) => {
   const text = {
     errorAuthor: '',
     errorTitle: '',
@@ -17,7 +17,7 @@ export const errorTexts = (author, title, link) => {
     text.errorTitle = 'Введите название произведения';
   }
 
-  if (!link.startsWith('https://www.youtube.com/') && link) {
+  if (link && !link.startsWith('https://www.youtube.com/')) {
     text.errorLink = 'Введите или вставьте ссылку с YouTube';
   }
 

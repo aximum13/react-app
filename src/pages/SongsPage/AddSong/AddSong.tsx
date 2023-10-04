@@ -74,7 +74,7 @@ const AddSong = () => {
         id: currentId + 1,
         author: formValues.author.trim(),
         title: formValues.title.trim(),
-        url: formValues.linkOnYouTube.trim(),
+        linkOnYouTube: formValues.linkOnYouTube.trim(),
       })
     );
 
