@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { load } from 'redux-localstorage-simple';
 
 import { SongsState, Song, LocalStorageState } from 'models/song/types/types';
@@ -19,7 +19,7 @@ export const songsSlice = createSlice({
   name: 'songs',
   initialState,
   reducers: {
-    addSong: (state, action) => {
+    addSong: (state, action: PayloadAction<Song>) => {
       const newSong: Song = {
         id: action.payload.id,
         author: action.payload.author,
@@ -31,21 +31,30 @@ export const songsSlice = createSlice({
 
       return state;
     },
-    
-    editSong: (state, action) => {
-      state.songs.map((song: Song) => {
+
+    editSong: (state, action: PayloadAction<Song>) => {
+      state.songs = state.songs.map((song: Song) => {
         if (song.id === action.payload.id) {
-          song.author = action.payload.author;
-          song.title = action.payload.title;
-          song.linkOnYouTube = action.payload.linkOnYouTube;
+          return {
+            ...song,
+            author: action.payload.author,
+            title: action.payload.title,
+            linkOnYouTube: action.payload.linkOnYouTube,
+          };
         }
+        return song;
       });
+    },
+
+    deleteSong: (state, action: PayloadAction<number>) => {
+      state.songs = state.songs.filter((song) => song.id !== action.payload);
+      return state;
     },
   },
 });
 
 const { actions, reducer } = songsSlice;
 
-export const { addSong, editSong } = actions;
+export const { addSong, editSong, deleteSong } = actions;
 
 export default reducer;
