@@ -1,6 +1,19 @@
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
+interface ModalTypes {
+  show: boolean;
+  handleClose: () => void;
+  isForm?: boolean;
+  isEdit?: boolean;
+  title: string;
+  btnCancelText: string;
+  btnSubmitText?: string;
+  handleSubmit?: () => void;
+  handleDelete?: () => void;
+  children: React.ReactNode;
+}
+
 const ModalCmp = ({
   children,
   isForm,
@@ -9,10 +22,10 @@ const ModalCmp = ({
   title,
   btnCancelText,
   btnSubmitText,
-  handleSubmit,
   handleClose,
+  handleSubmit,
   handleDelete,
-}) => {
+}: ModalTypes) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>

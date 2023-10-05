@@ -21,7 +21,7 @@ type SongType = {
   index: number;
   author: string;
   title: string;
-  linkOnYouTube: string;
+  linkOnYouTube: string | undefined;
 };
 
 const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
@@ -85,14 +85,18 @@ const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
         id: id,
         author: formValues.author.trim(),
         title: formValues.title.trim(),
-        linkOnYouTube: formValues.linkOnYouTube.trim(),
+        linkOnYouTube: formValues.linkOnYouTube
+          ? formValues.linkOnYouTube.trim()
+          : undefined,
       })
     );
 
     setFormValues({
       author: formValues.author.trim(),
       title: formValues.title.trim(),
-      linkOnYouTube: formValues.linkOnYouTube.trim(),
+      linkOnYouTube: formValues.linkOnYouTube
+        ? formValues.linkOnYouTube.trim()
+        : undefined,
     });
     setErrors({ errorAuthor: '', errorTitle: '', errorLink: '' });
     setIsEdit(false);
@@ -111,7 +115,6 @@ const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
         </div>
 
         <ButtonGroup>
-          {' '}
           <Button
             className={classNames(styles.ButtonShow, 'showed me-3')}
             variant="outline-success"
@@ -132,13 +135,8 @@ const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
       <ModalCmp
         show={isShow}
         handleClose={handleCloseShow}
-        isForm={false}
-        isEdit={false}
         title={'Просмотр'}
         btnCancelText={'Закрыть'}
-        handleSubmit={undefined}
-        handleDelete={undefined}
-        btnSubmitText={undefined}
       >
         {linkOnYouTube ? (
           <a
@@ -160,8 +158,8 @@ const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
 
       <ModalCmp
         show={isEdit}
-        isForm={true}
         isEdit={true}
+        isForm={true}
         handleDelete={() => handleDeleteSong(id)}
         handleClose={handleCloseEdit}
         handleSubmit={handleFormSubmit}

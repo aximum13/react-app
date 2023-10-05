@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import { getSongs } from 'models/song/selectors/SongsSelector';
+import { SongState } from 'models/song/types/types';
 import Song from '../Song/Song';
 
 import styles from './SongsList.module.scss';
@@ -10,26 +11,16 @@ const SongsList = () => {
 
   return (
     <ul className={styles.SongsList}>
-      {items.map(
-        (
-          item: {
-            id: number;
-            author: string;
-            title: string;
-            linkOnYouTube: string;
-          },
-          index: number
-        ) => (
-          <Song
-            id={item.id}
-            index={index}
-            key={item.id}
-            author={item.author}
-            title={item.title}
-            linkOnYouTube={item.linkOnYouTube}
-          />
-        )
-      )}
+      {items.map((item: SongState, index: number) => (
+        <Song
+          id={item.id}
+          index={index}
+          key={item.id}
+          author={item.author}
+          title={item.title}
+          linkOnYouTube={item.linkOnYouTube}
+        />
+      ))}
     </ul>
   );
 };

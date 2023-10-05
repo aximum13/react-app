@@ -92,10 +92,8 @@ const AddSong = () => {
       <ModalCmp
         show={isShow}
         isForm={true}
-        isEdit={false}
         handleClose={handleClose}
         handleSubmit={handleFormSubmit}
-        handleDelete={undefined}
         title={'Новое произведение'}
         btnCancelText={'Отмена'}
         btnSubmitText={'Добавить'}
