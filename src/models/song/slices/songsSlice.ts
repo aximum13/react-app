@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { load } from 'redux-localstorage-simple';
 
-import { SongsState, Song, LocalStorageState } from 'models/song/types/types';
+import {
+  SongsState,
+  SongState,
+  LocalStorageState,
+} from 'models/song/types/types';
 
 let SONGS = load({ namespace: 'musicList' }) as LocalStorageState;
 
@@ -19,8 +23,8 @@ export const songsSlice = createSlice({
   name: 'songs',
   initialState,
   reducers: {
-    addSong: (state, action: PayloadAction<Song>) => {
-      const newSong: Song = {
+    addSong: (state, action: PayloadAction<SongState>) => {
+      const newSong: SongState = {
         id: action.payload.id,
         author: action.payload.author,
         title: action.payload.title,
@@ -32,8 +36,8 @@ export const songsSlice = createSlice({
       return state;
     },
 
-    editSong: (state, action: PayloadAction<Song>) => {
-      state.songs = state.songs.map((song: Song) => {
+    editSong: (state, action: PayloadAction<SongState>) => {
+      state.songs = state.songs.map((song: SongState) => {
         if (song.id === action.payload.id) {
           return {
             ...song,

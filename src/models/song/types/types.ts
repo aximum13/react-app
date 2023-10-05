@@ -1,14 +1,14 @@
 export type SongsState = {
-  songs: Song[];
+  songs: SongState[];
 };
 
-export type Song = {
-  id: number | null;
+export type SongState = {
+  id: number;
   author: string;
   title: string;
   linkOnYouTube?: string;
 };
 
 export type LocalStorageState = {
-  songs: Song[];
+  songs: SongState[];
 };

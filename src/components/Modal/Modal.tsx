@@ -4,12 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 const ModalCmp = ({
   children,
   isForm,
+  isEdit,
+  show,
   title,
-  handleSubmit,
   btnCancelText,
   btnSubmitText,
-  show,
+  handleSubmit,
   handleClose,
+  handleDelete,
 }) => {
   return (
     <Modal show={show} onHide={handleClose}>
@@ -18,7 +20,10 @@ const ModalCmp = ({
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button
+          variant="secondary"
+          onClick={isEdit ? handleDelete : handleClose}
+        >
           {btnCancelText}
         </Button>
         {isForm && (

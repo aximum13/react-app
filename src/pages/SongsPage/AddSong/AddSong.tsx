@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getSongs } from 'models/song/selectors/SongsSelector';
 import { addSong } from 'models/song/slices/songsSlice';
+import { getSongs } from 'models/song/selectors/SongsSelector';
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
 
@@ -92,8 +92,10 @@ const AddSong = () => {
       <ModalCmp
         show={isShow}
         isForm={true}
+        isEdit={false}
         handleClose={handleClose}
         handleSubmit={handleFormSubmit}
+        handleDelete={undefined}
         title={'Новое произведение'}
         btnCancelText={'Отмена'}
         btnSubmitText={'Добавить'}
