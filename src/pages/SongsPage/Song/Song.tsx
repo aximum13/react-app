@@ -75,7 +75,9 @@ const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
         setFormValues({
           author: trimText(formValues.author),
           title: trimText(formValues.title),
-          linkOnYouTube: trimText(formValues.linkOnYouTube),
+          linkOnYouTube: formValues.linkOnYouTube
+            ? trimText(formValues.linkOnYouTube)
+            : undefined,
         })
       );
     }

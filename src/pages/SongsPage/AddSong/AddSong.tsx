@@ -17,7 +17,7 @@ const AddSong = () => {
   const dispatch = useDispatch();
 
   const songs = useSelector(getSongs);
-  const initialId = songs.length > 0 ? songs[songs.length - 1].id : 0;
+  const initialId: number = songs.length > 0 ? songs[songs.length - 1].id : 0;
   const [currentId, setCurrentId] = useState(initialId);
 
   const [formValues, setFormValues] = useState({
