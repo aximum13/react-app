@@ -9,22 +9,20 @@ import ModalCmp from 'components/Modal/Modal';
 
 import styles from './Song.module.scss';
 
+import { useDispatch } from 'react-redux';
+import { deleteSong, editSong } from 'models/songs/slices/songsSlice';
+import { SongState } from 'models/songs/types/types';
+
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
-import { deleteSong, editSong } from 'models/song/slices/songsSlice';
-import { useDispatch } from 'react-redux';
+import { ucFirst } from 'utils/ucFirst';
 
 import FormCmp from 'components/Form/Form';
 
-type SongType = {
-  id: number;
+type Props = SongState & {
   index: number;
-  author: string;
-  title: string;
-  linkOnYouTube: string | undefined;
 };
-
-const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
+const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
   const dispatch = useDispatch();
 
   const [isShow, setIsShow] = useState(false);
@@ -113,7 +111,7 @@ const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
     <>
       <li className={classNames(styles.Song)}>
         <div className={styles.Text}>
-          {index + 1}. {author} - {title}
+          {index + 1}. {ucFirst(author)} - {ucFirst(title)}
         </div>
 
         <ButtonGroup>
@@ -147,8 +145,7 @@ const Song = ({ id, index, author, title, linkOnYouTube }: SongType) => {
             rel="noreferrer"
             target="_blank"
           >
-            Композитор: {author}
-            Название: {title}
+            {ucFirst(author)} - {ucFirst(title)}
           </a>
         ) : (
           <>
