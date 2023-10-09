@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { addSong } from 'models/song/slices/songsSlice';
-import { getSongs } from 'models/song/selectors/SongsSelector';
+import { addSong } from 'models/songs/slices/songsSlice';
+import { getSongs } from 'models/songs/selectors/SongsSelector';
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
 

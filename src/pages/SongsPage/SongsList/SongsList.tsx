@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import { getSongs } from 'models/song/selectors/SongsSelector';
-import { SongState } from 'models/song/types/types';
+import { getSongs } from 'models/songs/selectors/SongsSelector';
+import { SongState } from 'models/songs/types/types';
 import Song from '../Song/Song';
 
 import styles from './SongsList.module.scss';

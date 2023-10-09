@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { getSongs } from 'models/song/selectors/SongsSelector';
+import { getSongs } from 'models/songs/selectors/SongsSelector';
 import { isItems } from 'utils/isItems';
 
 import AddSong from 'pages/SongsPage/AddSong/AddSong';
