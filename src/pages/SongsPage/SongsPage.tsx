@@ -6,12 +6,15 @@ import { isItems } from 'utils/isItems';
 import AddSong from 'pages/SongsPage/AddSong/AddSong';
 import SongsList from 'pages/SongsPage/SongsList/SongsList';
 import Title from 'components/Title/Title';
+import Filter from 'pages/SongsPage/Filter/Filter';
 
 const SongsPage = () => {
   const items = useSelector(getSongs);
+
   return (
     <>
       <Title />
+      <Filter />
       <AddSong />
       {isItems(items) && <SongsList />}
     </>

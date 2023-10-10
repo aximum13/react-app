@@ -1,19 +1,27 @@
 import classNames from 'classnames';
 import styles from './Filter.module.scss';
 
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { filterSongs } from 'models/filters/slices/filtersSlice';
 
 const Filter = () => {
+  const dispatch = useDispatch();
+
   const [authorFilter, setAuthorFilter] = useState('');
   const [titleFilter, setTitleFilter] = useState('');
 
   const handleAuthorFilterChange = (e: { target: { value: string } }) => {
     const value: string = e.target.value;
+    const activeFilter = 'FILTER_BY_AUTHOR';
+    dispatch(filterSongs({ value, activeFilter }));
     setAuthorFilter(value);
   };
 
   const handleTitleFilterChange = (e: { target: { value: string } }) => {
     const value: string = e.target.value;
+    const activeFilter = 'FILTER_BY_TITLE';
+    dispatch(filterSongs({ value, activeFilter }));
     setTitleFilter(value);
   };
 

@@ -1,17 +1,26 @@
 import { useSelector } from 'react-redux';
 
 import { getSongs } from 'models/songs/selectors/SongsSelector';
-import { SongState } from 'models/songs/types/types';
+import { getFilters } from 'models/filters/selectors/FiltersSelector';
+import { SongState } from 'models/songs/types';
 import Song from '../Song/Song';
 
 import styles from './SongsList.module.scss';
+import { filteredItems } from 'utils/filteredItems';
 
 const SongsList = () => {
   const items = useSelector(getSongs);
+  const filters = useSelector(getFilters);
+
+  const filteredResults = filteredItems(
+    items,
+    filters.value,
+    filters.activeFilter
+  );
 
   return (
     <ul className={styles.SongsList}>
-      {items.map((item: SongState, index: number) => (
+      {filteredResults.map((item: SongState, index: number) => (
         <Song
           id={item.id}
           index={index}

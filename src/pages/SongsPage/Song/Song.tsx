@@ -11,7 +11,7 @@ import styles from './Song.module.scss';
 
 import { useDispatch } from 'react-redux';
 import { deleteSong, editSong } from 'models/songs/slices/songsSlice';
-import { SongState } from 'models/songs/types/types';
+import { SongState } from 'models/songs/types';
 
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
@@ -22,6 +22,7 @@ import FormCmp from 'components/Form/Form';
 type Props = SongState & {
   index: number;
 };
+
 const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
   const dispatch = useDispatch();
 
@@ -43,11 +44,9 @@ const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
   };
 
   const [errors, setErrors] = useState(newErrors);
-
   const [isEdit, setIsEdit] = useState(false);
 
   const handleEdit = () => setIsEdit(true);
-
   const handleCloseEdit = () => setIsEdit(false);
 
   const handleInputChange = (e: {
