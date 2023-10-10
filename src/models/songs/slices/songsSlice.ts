@@ -1,22 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { load } from 'redux-localstorage-simple';
 
-import {
-  SongsState,
-  SongState,
-  LocalStorageState,
-} from 'models/songs/types/types';
+import { SongsState, SongState, LocalStorageState } from 'models/songs/types';
 
 let SONGS = load({ namespace: 'musicList' }) as LocalStorageState;
 
-if (!SONGS || !SONGS.songs || !SONGS.songs.length) {
-  SONGS = {
-    songs: [],
+if (!SONGS || !SONGS.songs.list || !SONGS.songs.list.length) {
+  SONGS.songs = {
+    list: [],
   };
 }
 
 const initialState: SongsState = {
-  songs: SONGS.songs,
+  list: SONGS.songs.list,
 };
 
 export const songsSlice = createSlice({
@@ -32,7 +28,7 @@ export const songsSlice = createSlice({
         linkOnYouTube,
       };
 
-      state.songs.push(newSong);
+      state.list.push(newSong);
 
       return state;
     },
@@ -40,7 +36,7 @@ export const songsSlice = createSlice({
     editSong: (state, action: PayloadAction<SongState>) => {
       const { id, author, title, linkOnYouTube } = action.payload;
 
-      state.songs = state.songs.map((song: SongState) => {
+      state.list = state.list.map((song: SongState) => {
         if (song.id === id) {
           return {
             ...song,
@@ -55,7 +51,7 @@ export const songsSlice = createSlice({
 
     deleteSong: (state, action: PayloadAction<number>) => {
       const songId = action.payload;
-      state.songs = state.songs.filter((song) => song.id !== songId);
+      state.list = state.list.filter((song) => song.id !== songId);
       return state;
     },
   },

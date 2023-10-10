@@ -1,5 +1,5 @@
 export type SongsState = {
-  songs: SongState[];
+  list: SongState[];
 };
 
 export type SongState = {
@@ -10,5 +10,7 @@ export type SongState = {
 };
 
 export type LocalStorageState = {
-  songs: SongState[];
+  songs: {
+    list: SongState[];
+  };
 };

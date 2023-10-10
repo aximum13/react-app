@@ -1,3 +1,3 @@
-const songsSelector = (state) => state.songs;
+const songsSelector = (state) => state.songs.list;
 
 export const getSongs = songsSelector;
