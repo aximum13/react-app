@@ -1,0 +1,19 @@
+.Filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.Filter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.Input {
+  margin-left: 12px;
+}
