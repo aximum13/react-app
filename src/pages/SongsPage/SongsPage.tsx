@@ -14,7 +14,7 @@ const SongsPage = () => {
   return (
     <>
       <Title />
-      <Filter />
+      {isItems(items) && <Filter />}
       <AddSong />
       {isItems(items) && <SongsList />}
     </>
