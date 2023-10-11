@@ -5,12 +5,6 @@ import { SongsState, SongState, LocalStorageState } from 'models/songs/types';
 
 let SONGS = load({ namespace: 'musicList' }) as LocalStorageState;
 
-if (!SONGS || !SONGS.songs.list || !SONGS.songs.list.length) {
-  SONGS.songs = {
-    list: [],
-  };
-}
-
 const initialState: SongsState = {
   list: SONGS.songs.list,
 };
