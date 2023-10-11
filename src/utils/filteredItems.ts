@@ -1,7 +1,7 @@
 import { SongState } from 'models/songs/types';
 
 export const filteredItems = (
-  items: [],
+  items: SongState[],
   value: string,
   activeFilter: string
 ) => {

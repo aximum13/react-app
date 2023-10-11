@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from 'hooks';
 
 import { addSong } from 'models/songs/slices/songsSlice';
 import { getSongs } from 'models/songs/selectors/SongsSelector';
@@ -13,10 +13,10 @@ import { Button } from 'react-bootstrap';
 import ModalCmp from 'components/Modal/Modal';
 import FormCmp from 'components/Form/Form';
 
-const AddSong = () => {
-  const dispatch = useDispatch();
+const AddSong: React.FC = () => {
+  const dispatch = useAppDispatch();
 
-  const songs = useSelector(getSongs);
+  const songs = useAppSelector(getSongs);
   const initialId: number = songs.length > 0 ? songs[songs.length - 1].id : 0;
   const [currentId, setCurrentId] = useState(initialId);
 

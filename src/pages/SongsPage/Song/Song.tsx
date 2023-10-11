@@ -9,7 +9,7 @@ import ModalCmp from 'components/Modal/Modal';
 
 import styles from './Song.module.scss';
 
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from 'hooks';
 import { deleteSong, editSong } from 'models/songs/slices/songsSlice';
 import { SongState } from 'models/songs/types';
 
@@ -24,7 +24,7 @@ type Props = SongState & {
 };
 
 const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [isShow, setIsShow] = useState(false);
 

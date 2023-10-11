@@ -1,1 +1,3 @@
-export const isItems = (items: []) => items && items.length > 0;
+import { SongState } from 'models/songs/types';
+
+export const isItems = (items: SongState[]) => items && items.length > 0;

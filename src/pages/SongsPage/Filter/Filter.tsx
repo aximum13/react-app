@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import styles from './Filter.module.scss';
 
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from 'hooks';
 import { useState } from 'react';
 import { filterSongs } from 'models/filters/slices/filtersSlice';
 
 const Filter = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [authorFilter, setAuthorFilter] = useState('');
   const [titleFilter, setTitleFilter] = useState('');

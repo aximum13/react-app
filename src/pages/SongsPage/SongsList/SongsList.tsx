@@ -1,16 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'hooks';
 
 import { getSongs } from 'models/songs/selectors/SongsSelector';
 import { getFilters } from 'models/filters/selectors/FiltersSelector';
 import { SongState } from 'models/songs/types';
+
 import Song from '../Song/Song';
 
 import styles from './SongsList.module.scss';
 import { filteredItems } from 'utils/filteredItems';
 
 const SongsList = () => {
-  const items = useSelector(getSongs);
-  const filters = useSelector(getFilters);
+  const items = useAppSelector(getSongs);
+  const filters = useAppSelector(getFilters);
 
   const filteredResults = filteredItems(
     items,

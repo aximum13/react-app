@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'hooks';
 
 import { getSongs } from 'models/songs/selectors/SongsSelector';
 import { isItems } from 'utils/isItems';
@@ -9,7 +9,7 @@ import Title from 'components/Title/Title';
 import Filter from 'pages/SongsPage/Filter/Filter';
 
 const SongsPage = () => {
-  const items = useSelector(getSongs);
+  const items = useAppSelector(getSongs);
 
   return (
     <>
