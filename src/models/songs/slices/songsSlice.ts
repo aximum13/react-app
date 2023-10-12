@@ -7,6 +7,8 @@ let SONGS = load({ namespace: 'musicList' }) as LocalStorageState;
 
 const initialState: SongsState = {
   list: SONGS.songs.list,
+} || {
+  list: [],
 };
 
 export const songsSlice = createSlice({
