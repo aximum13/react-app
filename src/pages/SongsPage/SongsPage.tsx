@@ -1,22 +1,20 @@
 import { useAppSelector } from 'hooks';
 
-import { getSongs } from 'models/songs/selectors/SongsSelector';
-import { isItems } from 'utils/isItems';
+import { getSongs } from 'models/songs/selectors/songsSelector';
+import { isSongs } from 'utils/isSongs';
 
-import AddSong from 'pages/SongsPage/AddSong/AddSong';
-import SongsList from 'pages/SongsPage/SongsList/SongsList';
-import Title from 'components/Title/Title';
-import Filter from 'pages/SongsPage/Filter/Filter';
+import SongsList from 'pages/SongsPage/SongsList';
+import Title from 'components/Title';
+import Header from 'pages/SongsPage/Header';
 
-const SongsPage = () => {
-  const items = useAppSelector(getSongs);
+const SongsPage: React.FC = () => {
+  const songs = useAppSelector(getSongs);
 
   return (
     <>
       <Title />
-      {isItems(items) && <Filter />}
-      <AddSong />
-      {isItems(items) && <SongsList />}
+      <Header />
+      {isSongs(songs) && <SongsList />}
     </>
   );
 };

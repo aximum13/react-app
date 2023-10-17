@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { ButtonGroup } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
-import ModalCmp from 'components/Modal/Modal';
+import ModalCmp from 'components/Modal';
 
 import styles from './Song.module.scss';
 
@@ -17,7 +17,7 @@ import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
 import { ucFirst } from 'utils/ucFirst';
 
-import FormCmp from 'components/Form/Form';
+import FormCmp from 'components/Form';
 
 type Props = SongState & {
   index: number;

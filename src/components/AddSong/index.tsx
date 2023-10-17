@@ -3,21 +3,22 @@ import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from 'hooks';
 
 import { addSong } from 'models/songs/slices/songsSlice';
-import { getSongs } from 'models/songs/selectors/SongsSelector';
+import { getSongs } from 'models/songs/selectors/songsSelector';
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
-
-import styles from './AddSong.module.scss';
+import { isSongs } from 'utils/isSongs';
 
 import { Button } from 'react-bootstrap';
-import ModalCmp from 'components/Modal/Modal';
-import FormCmp from 'components/Form/Form';
+import ModalCmp from 'components/Modal';
+import FormCmp from 'components/Form';
 
 const AddSong: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const songs = useAppSelector(getSongs);
+
   const initialId: number = songs.length > 0 ? songs[songs.length - 1].id : 0;
+
   const [currentId, setCurrentId] = useState(initialId);
 
   const [formValues, setFormValues] = useState({
@@ -86,7 +87,10 @@ const AddSong: React.FC = () => {
 
   return (
     <>
-      <Button onClick={handleOpen} className={classNames(styles.AddSong)}>
+      <Button
+        onClick={handleOpen}
+        className={classNames(!isSongs(songs) && 'centered')}
+      >
         Добавить
       </Button>
       <ModalCmp
