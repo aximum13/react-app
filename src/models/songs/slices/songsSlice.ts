@@ -1,14 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { load } from 'redux-localstorage-simple';
 
-import { SongsState, SongState, LocalStorageState } from 'models/songs/types';
+import {
+  SongsState,
+  SongState,
+  LocalStorageState,
+  FilterTypes,
+} from 'models/songs/types';
 
 let SONGS = load({ namespace: 'musicList' }) as LocalStorageState;
 
-const initialState: SongsState = {
-  list: SONGS.songs.list,
-} || {
-  list: [],
+const initialState: SongsState & FilterTypes = {
+  list: SONGS?.list ?? [],
+  query: '',
 };
 
 export const songsSlice = createSlice({
@@ -50,11 +54,16 @@ export const songsSlice = createSlice({
       state.list = state.list.filter((song) => song.id !== songId);
       return state;
     },
+
+    filterSongs: (state, action: PayloadAction<FilterTypes>) => {
+      const { query } = action.payload;
+      return { ...state, query };
+    },
   },
 });
 
 const { actions, reducer } = songsSlice;
 
-export const { addSong, editSong, deleteSong } = actions;
+export const { addSong, editSong, deleteSong, filterSongs } = actions;
 
 export default reducer;
