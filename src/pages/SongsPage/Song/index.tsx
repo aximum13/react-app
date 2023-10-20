@@ -74,7 +74,7 @@ const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
           title: trimText(formValues.title),
           linkOnYouTube: formValues.linkOnYouTube
             ? trimText(formValues.linkOnYouTube)
-            : undefined,
+            : '',
         })
       );
     }
@@ -86,7 +86,7 @@ const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
         title: formValues.title.trim(),
         linkOnYouTube: formValues.linkOnYouTube
           ? formValues.linkOnYouTube.trim()
-          : undefined,
+          : '',
       })
     );
 
@@ -95,7 +95,7 @@ const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
       title: formValues.title.trim(),
       linkOnYouTube: formValues.linkOnYouTube
         ? formValues.linkOnYouTube.trim()
-        : undefined,
+        : '',
     });
     setErrors({ errorAuthor: '', errorTitle: '', errorLink: '' });
     setIsEdit(false);
