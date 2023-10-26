@@ -1,4 +1,4 @@
-@import './../../../styles/variables';
+@import 'styles/variables';
 
 .Song {
   display: flex;
@@ -22,13 +22,6 @@
 
 .Text {
   word-break: break-all;
-  width: 90%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  margin-bottom: 10px;
 
   &:last-child {
     margin-bottom: 0;
