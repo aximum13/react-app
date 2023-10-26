@@ -1,0 +1,54 @@
+@import './../../../styles/variables';
+
+.Song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid rgb(197, 187, 187);
+  gap: 20px;
+}
+
+.Title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.TextContainer {
+  width: 100%;
+}
+
+.Text {
+  word-break: break-all;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.ButtonShow {
+  @media (max-width: $mobile) {
+    padding: 6px;
+    line-height: 1.2;
+  }
+}
+
+.ModalText {
+  word-break: break-word;
+}
+
+.NotFound {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}

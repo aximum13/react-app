@@ -2,7 +2,7 @@ import { useAppSelector } from 'hooks';
 
 import { getFilters } from 'models/songs/selectors/songsSelector';
 
-import Song from '../Song';
+import SongDetail from '../SongDetail';
 
 import styles from './SongsList.module.scss';
 
@@ -12,7 +12,7 @@ const SongsList: React.FC = () => {
   return (
     <ul className={styles.SongsList}>
       {filters?.map(({ id, author, title, linkOnYouTube }, index: number) => (
-        <Song
+        <SongDetail
           id={id}
           index={index}
           key={id}

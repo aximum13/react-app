@@ -1,13 +1,12 @@
 import classNames from 'classnames';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Button } from 'react-bootstrap';
 import { ButtonGroup } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
-import ModalCmp from 'components/Modal';
-
-import styles from './Song.module.scss';
+import styles from './SongDetail.module.scss';
 
 import { useAppDispatch } from 'hooks';
 import { deleteSong, editSong } from 'models/songs/slices/songsSlice';
@@ -18,12 +17,13 @@ import { trimText } from 'utils/trimText';
 import { ucFirst } from 'utils/ucFirst';
 
 import FormCmp from 'components/Form';
+import ModalCmp from 'components/Modal';
 
 type Props = SongState & {
   index: number;
 };
 
-const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
+const SongDetail = ({ id, index, author, title, linkOnYouTube }: Props) => {
   const dispatch = useAppDispatch();
 
   const [isShow, setIsShow] = useState(false);
@@ -109,9 +109,9 @@ const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
   return (
     <>
       <li className={classNames(styles.Song)}>
-        <div className={styles.Text}>
+        <Link to={`songs/${id}`} className={styles.Text}>
           {index + 1}. {ucFirst(author)} - {ucFirst(title)}
-        </div>
+        </Link>
 
         <ButtonGroup>
           <Button
@@ -130,7 +130,6 @@ const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
           </Button>
         </ButtonGroup>
       </li>
-
       <ModalCmp
         show={isShow}
         handleClose={handleCloseShow}
@@ -175,4 +174,4 @@ const Song = ({ id, index, author, title, linkOnYouTube }: Props) => {
   );
 };
 
-export default Song;
+export default SongDetail;
