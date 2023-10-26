@@ -17,7 +17,11 @@ export const errorTexts = (author: string, title: string, link?: string) => {
     text.errorTitle = 'Введите название произведения';
   }
 
-  if (link && !link.startsWith('https://www.youtube.com/')) {
+  if (
+    link &&
+    !link.startsWith('https://www.youtube.com/') &&
+    !link.startsWith('https://youtu.be/')
+  ) {
     text.errorLink = 'Введите или вставьте ссылку с YouTube';
   }
 
