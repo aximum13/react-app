@@ -111,11 +111,11 @@ const Song = () => {
   const handleDeleteSong = (id: number) => {
     dispatch(deleteSong(id));
     setIsEdit(false);
-    navigate('/');
+    navigate('/react-app');
   };
 
   return (
-    <>
+    <div className={styles.Container}>
       <h1 className={classNames(styles.Title)}>Произведение</h1>
       {song ? (
         <div className={classNames(styles.Song)}>
@@ -140,7 +140,7 @@ const Song = () => {
               <FiEdit />
             </Button>
             <Button
-              className={classNames(styles.ButtonShow, 'deleted ')}
+              className={classNames(styles.ButtonDelete, 'deleted ')}
               variant="outline-danger"
               onClick={() => handleDeleteSong(idSong)}
             >
@@ -151,11 +151,15 @@ const Song = () => {
       ) : (
         <>
           <p className={styles.NotFound}>Не найдено. </p>
-          <Link className={styles.NotFound} to={'/'} replace>
-            Вернуться на главную страницу
-          </Link>
         </>
       )}
+      <Link
+        className={classNames(song ? styles.ToHome : styles.ToHomeNotFound)}
+        to={'/react-app'}
+        replace
+      >
+        Вернуться на главную страницу
+      </Link>
 
       <ModalCmp
         show={isEdit}
@@ -172,7 +176,7 @@ const Song = () => {
           handleInputChange={handleInputChange}
         ></FormCmp>
       </ModalCmp>
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Container from 'components/Container';
 
@@ -11,11 +11,11 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Container />}>
+        <Route path="react-app" element={<Container />}>
           <Route index element={<SongsPage />} />
           <Route path="songs/:id" element={<SongPage />} />
-          <Route path="*" element={<SongsPage />} />
         </Route>
+        <Route path="*" element={<Navigate to="react-app" replace />} />
       </Routes>
     </>
   );
