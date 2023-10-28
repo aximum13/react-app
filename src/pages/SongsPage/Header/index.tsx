@@ -7,14 +7,21 @@ import { isSongs } from 'utils/isSongs';
 import AddSong from 'components/AddSong';
 import Filter from 'components/Filter';
 
+import { FilterTypes } from 'components/Filter/types';
+
 import styles from './Header.module.scss';
 
-const Header: React.FC = () => {
+const Header: React.FC<FilterTypes> = ({ setSearchParams, songQuery }) => {
   const songs = useAppSelector(getSongs);
+
   return (
     <div className={classNames(styles.Header)}>
-      {isSongs(songs) && <Filter />}
-      <AddSong />
+      {isSongs(songs) && (
+        <>
+          <AddSong />
+          <Filter setSearchParams={setSearchParams} songQuery={songQuery} />
+        </>
+      )}
     </div>
   );
 };

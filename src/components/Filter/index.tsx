@@ -1,16 +1,22 @@
 import classNames from 'classnames';
 
-import { useAppDispatch } from 'hooks';
-import { filterSongs } from 'models/songs/slices/songsSlice';
+import { useState } from 'react';
 
 import styles from './Filter.module.scss';
 
-const Filter: React.FC = () => {
-  const dispatch = useAppDispatch();
+import { FilterTypes } from './types';
 
-  const handleValueFilterChange = (e: { target: { value: string } }) => {
-    const query: string = e.target.value;
-    dispatch(filterSongs({ query }));
+const Filter: React.FC<FilterTypes> = ({ setSearchParams, songQuery }) => {
+  const [search, setSearch] = useState(songQuery);
+
+  const params = { song: '' };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query: string = event.target.value;
+
+    if (query.length) params.song = query;
+    setSearchParams(params);
+    setSearch(query);
   };
 
   return (
@@ -19,9 +25,11 @@ const Filter: React.FC = () => {
         Фильтр:
         <input
           className={classNames(styles.Input)}
-          type="text"
+          value={search}
+          name="search"
+          onChange={handleChange}
           placeholder="Чайковский"
-          onChange={handleValueFilterChange}
+          type="text"
         />
       </label>
     </div>
