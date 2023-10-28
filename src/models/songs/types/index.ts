@@ -1,6 +1,5 @@
 export type SongsState = {
   list: SongState[];
-  
 };
 
 export type SongState = {
@@ -12,8 +11,4 @@ export type SongState = {
 
 export type LocalStorageState = {
   list: SongState[];
-};
-
-export type FilterTypes = {
-  query: string;
 };

@@ -1,6 +1,6 @@
 import { useAppSelector } from 'hooks';
 
-import { getFilters } from 'models/songs/selectors/songsSelector';
+import { getSongs } from 'models/songs/selectors/songsSelector';
 
 import SongDetail from '../SongDetail';
 
@@ -9,11 +9,11 @@ import { SongsListTypes } from './types';
 import styles from './SongsList.module.scss';
 
 const SongsList: React.FC<SongsListTypes> = ({ songQuery }) => {
-  const filters = useAppSelector(getFilters);
+  const songs = useAppSelector(getSongs);
   return (
     <>
       <ul className={styles.SongsList}>
-        {filters
+        {songs
           ?.filter(
             (song) =>
               song.author.includes(songQuery) || song.title.includes(songQuery)
