@@ -1,10 +1,10 @@
 import Form from 'react-bootstrap/Form';
 
-interface FormTypes {
+export type FormTypes = {
   formValues: {
     id?: number;
-    author: string;
-    title: string;
+    author?: string;
+    title?: string;
     linkOnYouTube?: string;
   };
   errors: {
@@ -12,8 +12,8 @@ interface FormTypes {
     errorTitle: string;
     errorLink: string;
   };
-  handleInputChange: (e: { target: { name: string; value: string } }) => void;
-}
+  handleInputChange?: (e: { target: { name: string; value: string } }) => void;
+};
 const FormCmp = ({ handleInputChange, formValues, errors }: FormTypes) => {
   return (
     <>

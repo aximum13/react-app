@@ -1,9 +1,9 @@
 import SongDetail from '../SongDetail';
 
+import { SongState } from 'models/songs/types';
 import { SongsListTypes } from './types';
 
 import styles from './SongsList.module.scss';
-import { SongState } from 'models/songs/types';
 
 type Props = SongsListTypes & {
   songs: SongState[];
@@ -16,7 +16,8 @@ const SongsList: React.FC<Props> = ({ songQuery, songs }) => {
         {songs
           ?.filter(
             (song) =>
-              song.author.includes(songQuery) || song.title.includes(songQuery)
+              song.author?.includes(songQuery) ||
+              song.title?.includes(songQuery)
           )
           .map(({ id, author, title, linkOnYouTube }, index: number) => (
             <SongDetail

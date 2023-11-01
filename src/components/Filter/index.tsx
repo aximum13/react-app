@@ -1,10 +1,9 @@
 import classNames from 'classnames';
-
 import { useState } from 'react';
 
-import styles from './Filter.module.scss';
-
 import { FilterTypes } from './types';
+
+import styles from './Filter.module.scss';
 
 const Filter: React.FC<FilterTypes> = ({ setSearchParams, songQuery }) => {
   const [search, setSearch] = useState(songQuery);

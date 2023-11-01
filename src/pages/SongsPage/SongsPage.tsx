@@ -4,9 +4,9 @@ import { useSearchParams } from 'react-router-dom';
 import { getSongs } from 'models/songs/selectors/songsSelector';
 import { isSongs } from 'utils/isSongs';
 
-import SongsList from 'pages/SongsPage/SongsList';
 import Title from 'components/Title';
 import Header from 'pages/SongsPage/Header';
+import SongsList from 'pages/SongsPage/SongsList';
 
 const SongsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();

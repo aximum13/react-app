@@ -1,0 +1,14 @@
+@import 'styles/variables';
+
+.ButtonDelete {
+  @media (max-width: $mobile) {
+    padding: 6px;
+    line-height: 1.2;
+  }
+}
+.ButtonShowDetail {
+  @media (max-width: $mobile) {
+    padding: 6px;
+    line-height: 1.2;
+  }
+}

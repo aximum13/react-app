@@ -2,13 +2,13 @@ import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
 interface ModalTypes {
-  show: boolean;
-  handleClose: () => void;
+  show?: boolean;
   isForm?: boolean;
   isEdit?: boolean;
-  title: string;
-  btnCancelText: string;
+  title?: string;
+  btnCancelText?: string;
   btnSubmitText?: string;
+  handleClose?: () => void;
   handleSubmit?: () => void;
   handleDelete?: () => void;
   children: React.ReactNode;

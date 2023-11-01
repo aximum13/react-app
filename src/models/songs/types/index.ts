@@ -4,8 +4,8 @@ export type SongsState = {
 
 export type SongState = {
   id: number;
-  author: string;
-  title: string;
+  author?: string;
+  title?: string;
   linkOnYouTube?: string;
 };
 
