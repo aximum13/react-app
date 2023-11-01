@@ -16,11 +16,9 @@ const Header: React.FC<FilterTypes> = ({ setSearchParams, songQuery }) => {
 
   return (
     <div className={classNames(styles.Header)}>
+      <AddSong />
       {isSongs(songs) && (
-        <>
-          <AddSong />
-          <Filter setSearchParams={setSearchParams} songQuery={songQuery} />
-        </>
+        <Filter setSearchParams={setSearchParams} songQuery={songQuery} />
       )}
     </div>
   );
