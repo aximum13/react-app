@@ -17,8 +17,12 @@ const SongsPage: React.FC = () => {
   return (
     <>
       <Title />
-      <Header setSearchParams={setSearchParams} songQuery={songQuery} />
-      {isSongs(songs) && <SongsList songQuery={songQuery} />}
+      <Header
+        setSearchParams={setSearchParams}
+        songQuery={songQuery}
+        songs={songs}
+      />
+      {isSongs(songs) && <SongsList songQuery={songQuery} songs={songs} />}
     </>
   );
 };

@@ -1,15 +1,15 @@
-import { useAppSelector } from 'hooks';
-
-import { getSongs } from 'models/songs/selectors/songsSelector';
-
 import SongDetail from '../SongDetail';
 
 import { SongsListTypes } from './types';
 
 import styles from './SongsList.module.scss';
+import { SongState } from 'models/songs/types';
 
-const SongsList: React.FC<SongsListTypes> = ({ songQuery }) => {
-  const songs = useAppSelector(getSongs);
+type Props = SongsListTypes & {
+  songs: SongState[];
+};
+
+const SongsList: React.FC<Props> = ({ songQuery, songs }) => {
   return (
     <>
       <ul className={styles.SongsList}>

@@ -19,7 +19,6 @@ import { getSongs } from 'models/songs/selectors/songsSelector';
 
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
-import { ucFirst } from 'utils/ucFirst';
 
 const Song = () => {
   const dispatch = useAppDispatch();
@@ -47,6 +46,7 @@ const Song = () => {
     errorTitle: '',
     errorLink: '',
   };
+
   const [errors, setErrors] = useState(newErrors);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -108,6 +108,7 @@ const Song = () => {
     setErrors({ errorAuthor: '', errorTitle: '', errorLink: '' });
     setIsEdit(false);
   };
+
   const handleDeleteSong = (id: number) => {
     dispatch(deleteSong(id));
     setIsEdit(false);
@@ -122,12 +123,12 @@ const Song = () => {
           <div className={classNames(styles.TextContainer)}>
             {linkOnYouTube ? (
               <a href={linkOnYouTube} rel="noreferrer" target="_blank">
-                {ucFirst(author)} - {ucFirst(title)}
+                {author} - {title}
               </a>
             ) : (
               <>
-                <p className={styles.Text}>Композитор - {ucFirst(author)}</p>
-                <p className={styles.Text}>Название - {ucFirst(title)}</p>
+                <p className={styles.Text}>Композитор - {author}</p>
+                <p className={styles.Text}>Название - {title}</p>
               </>
             )}
           </div>
@@ -153,6 +154,7 @@ const Song = () => {
           <p className={styles.NotFound}>Не найдено. </p>
         </>
       )}
+
       <Link
         className={classNames(song ? styles.ToHome : styles.ToHomeNotFound)}
         to={'/react-app'}

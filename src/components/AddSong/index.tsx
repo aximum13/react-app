@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import { useAppSelector, useAppDispatch } from 'hooks';
+import { useAppDispatch } from 'hooks';
 
 import { addSong } from 'models/songs/slices/songsSlice';
-import { getSongs } from 'models/songs/selectors/songsSelector';
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
 import { isSongs } from 'utils/isSongs';
@@ -11,11 +10,14 @@ import { isSongs } from 'utils/isSongs';
 import { Button } from 'react-bootstrap';
 import ModalCmp from 'components/Modal';
 import FormCmp from 'components/Form';
+import { SongState } from 'models/songs/types';
 
-const AddSong: React.FC = () => {
+type Props = {
+  songs: SongState[];
+};
+
+const AddSong: React.FC<Props> = ({ songs }) => {
   const dispatch = useAppDispatch();
-
-  const songs = useAppSelector(getSongs);
 
   const initialId: number = songs.length > 0 ? songs[songs.length - 1].id : 0;
 
