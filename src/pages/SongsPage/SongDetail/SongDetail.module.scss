@@ -21,6 +21,8 @@
 
 .Text {
   word-break: break-all;
+  text-transform: capitalize;
+  text-decoration: none;
   width: 90%;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -32,6 +32,7 @@
 
 .Text {
   word-break: break-all;
+  text-transform: capitalize;
 
   &:last-child {
     margin-bottom: 0;

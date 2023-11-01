@@ -14,7 +14,6 @@ import { SongState } from 'models/songs/types';
 
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
-import { ucFirst } from 'utils/ucFirst';
 
 import FormCmp from 'components/Form';
 import ModalCmp from 'components/Modal';
@@ -110,7 +109,7 @@ const SongDetail = ({ id, index, author, title, linkOnYouTube }: Props) => {
     <>
       <li className={classNames(styles.Song)}>
         <Link to={`songs/${id}`} className={styles.Text}>
-          {index + 1}. {ucFirst(author)} - {ucFirst(title)}
+          {index + 1}. {author} - {title}
         </Link>
 
         <ButtonGroup>
@@ -143,7 +142,7 @@ const SongDetail = ({ id, index, author, title, linkOnYouTube }: Props) => {
             rel="noreferrer"
             target="_blank"
           >
-            {ucFirst(author)} - {ucFirst(title)}
+            {author} - {title}
           </a>
         ) : (
           <>
