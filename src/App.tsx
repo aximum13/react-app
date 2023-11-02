@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Container from 'components/Container';
 
 import SongPage from 'pages/SongPage';
-import SongsPage from 'pages/SongsPage/SongsPage';
+import SongsPage from 'pages/SongsPage';
 
 import './styles/app.scss';
 

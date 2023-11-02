@@ -1,12 +1,3 @@
-import classNames from 'classnames';
-import { Outlet } from 'react-router-dom';
-
-const Container: React.FC = () => {
-  return (
-    <div className={classNames('App')}>
-      <Outlet />
-    </div>
-  );
-};
+import Container from './Container';
 
 export default Container;
