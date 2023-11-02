@@ -25,15 +25,11 @@ const Song = () => {
       <h1 className={classNames(styles.Title)}>Произведение</h1>
 
       <Single
-        song={song}
         id={idSong}
         author={author}
         title={title}
         linkOnYouTube={linkOnYouTube}
-        isForm={true}
-        modalEditTitle={'Редактировать'}
-        btnCancelText={'Отмена'}
-        btnSubmitText={'Сохранить'}
+        song={song}
       />
     </div>
   );

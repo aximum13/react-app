@@ -17,35 +17,16 @@ import styles from './Song.module.scss';
 type Props = SongState & {
   index?: number;
   isDetail?: boolean;
-  isEdit?: boolean;
-  isShow?: boolean;
-  isForm?: boolean;
-  modalShowTitle?: string;
-  modalEditTitle?: string;
-  btnCancelText?: string;
-  btnShowCancelText?: string;
-  btnSubmitText?: string;
-  handleShow?: () => void;
-  handleCloseShow?: () => void;
   song?: SongState;
 };
 
 const Song: React.FC<Props> = ({
   isDetail,
-  isShow,
-  isForm,
   id,
   index,
   author,
   title,
   linkOnYouTube,
-  modalShowTitle,
-  modalEditTitle,
-  btnShowCancelText,
-  btnCancelText,
-  btnSubmitText,
-  handleShow,
-  handleCloseShow,
   song,
 }) => {
   const dispatch = useAppDispatch();
@@ -64,10 +45,14 @@ const Song: React.FC<Props> = ({
   };
 
   const [errors, setErrors] = useState(newErrors);
+
   const [isEdit, setIsEdit] = useState(false);
+  const [isShow, setIsShow] = useState(false);
+
+  const handleShow = () => setIsShow(true);
+  const handleCloseShow = () => setIsShow(false);
 
   const handleEdit = () => setIsEdit(true);
-
   const handleCloseEdit = () => {
     setSongProps({
       author,
@@ -105,6 +90,7 @@ const Song: React.FC<Props> = ({
         })
       );
     }
+
     dispatch(
       editSong({
         id: id,
@@ -115,13 +101,7 @@ const Song: React.FC<Props> = ({
           : '',
       })
     );
-    setSongProps({
-      author: songProps.author ? songProps.author.trim() : '',
-      title: songProps.title ? songProps.title.trim() : '',
-      linkOnYouTube: songProps.linkOnYouTube
-        ? songProps.linkOnYouTube.trim()
-        : '',
-    });
+
     setErrors({ errorAuthor: '', errorTitle: '', errorLink: '' });
     setIsEdit(false);
   };
@@ -147,22 +127,20 @@ const Song: React.FC<Props> = ({
           />
         </li>
       ) : song ? (
-        <>
-          <div className={classNames(styles.Song)}>
-            <div className={classNames(styles.TextContainer)}>
-              <LinkOnYouTube
-                linkOnYouTube={linkOnYouTube}
-                author={author}
-                title={title}
-              />
-            </div>
-            <ButtonsGroup
-              isDetail={isDetail}
-              handleLeftBtn={handleEdit}
-              handleRightBtn={() => handleDeleteSong(id)}
+        <div className={classNames(styles.Song)}>
+          <div className={classNames(styles.TextContainer)}>
+            <LinkOnYouTube
+              linkOnYouTube={linkOnYouTube}
+              author={author}
+              title={title}
             />
           </div>
-        </>
+          <ButtonsGroup
+            isDetail={isDetail}
+            handleLeftBtn={handleEdit}
+            handleRightBtn={() => handleDeleteSong(id)}
+          />
+        </div>
       ) : (
         <>
           <p className={styles.NotFound}>Не найдено. </p>
@@ -180,12 +158,7 @@ const Song: React.FC<Props> = ({
       )}
 
       {isDetail && (
-        <ModalCmp
-          show={isShow}
-          handleClose={handleCloseShow}
-          title={modalShowTitle}
-          btnCancelText={btnShowCancelText}
-        >
+        <ModalCmp show={isShow} isShow={true} handleClose={handleCloseShow}>
           <LinkOnYouTube
             linkOnYouTube={linkOnYouTube}
             author={author}
@@ -197,10 +170,7 @@ const Song: React.FC<Props> = ({
       <ModalCmp
         show={isEdit}
         isEdit={isDetail}
-        isForm={isForm}
-        title={modalEditTitle}
-        btnCancelText={btnCancelText}
-        btnSubmitText={btnSubmitText}
+        isForm={true}
         handleClose={handleCloseEdit}
         handleDelete={() => handleDeleteSong(id)}
         handleSubmit={handleFormSubmit}

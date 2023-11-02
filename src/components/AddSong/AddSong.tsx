@@ -1,13 +1,9 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import {
-  // useAppSelector,
-  useAppDispatch,
-} from 'hooks';
+import { useAppDispatch } from 'hooks';
 
 import { addSong } from 'models/songs/slices/songsSlice';
 import { SongState } from 'models/songs/types';
-// import { getSongs } from 'models/songs/selectors/songsSelector';
 import { errorTexts } from 'utils/errorTexts';
 import { trimText } from 'utils/trimText';
 import { isSongs } from 'utils/isSongs';
@@ -101,6 +97,7 @@ const AddSong: React.FC<Props> = ({ songs }) => {
       </Button>
       <ModalCmp
         show={isShow}
+        isNew={true}
         isForm={true}
         handleClose={handleClose}
         handleSubmit={handleFormSubmit}

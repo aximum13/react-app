@@ -5,6 +5,8 @@ interface ModalTypes {
   show?: boolean;
   isForm?: boolean;
   isEdit?: boolean;
+  isShow?: boolean;
+  isNew?: boolean;
   title?: string;
   btnCancelText?: string;
   btnSubmitText?: string;
@@ -17,11 +19,10 @@ interface ModalTypes {
 const ModalCmp = ({
   children,
   isForm,
+  isShow,
+  isNew,
   isEdit,
   show,
-  title,
-  btnCancelText,
-  btnSubmitText,
   handleClose,
   handleSubmit,
   handleDelete,
@@ -29,7 +30,9 @@ const ModalCmp = ({
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{title}</Modal.Title>
+        <Modal.Title>
+          {isNew ? 'Новое произведение' : isShow ? 'Просмотр' : 'Редактировать'}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
@@ -37,11 +40,11 @@ const ModalCmp = ({
           variant="secondary"
           onClick={isEdit ? handleDelete : handleClose}
         >
-          {btnCancelText}
+          {isEdit ? 'Удалить' : isShow ? 'Закрыть' : 'Отмена'}
         </Button>
         {isForm && (
           <Button variant="primary" onClick={handleSubmit}>
-            {btnSubmitText}
+            {isNew ? 'Добавить' : 'Сохранить'}
           </Button>
         )}
       </Modal.Footer>
