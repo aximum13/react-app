@@ -11,11 +11,11 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="react-app" element={<Container />}>
+        <Route path="songs" element={<Container />}>
           <Route index element={<SongsPage />} />
-          <Route path="songs/:id" element={<SongPage />} />
+          <Route path=":id" element={<SongPage />} />
         </Route>
-        <Route path="*" element={<Navigate to="react-app" replace />} />
+        <Route path="*" element={<Navigate to="songs" replace />} />
       </Routes>
     </>
   );

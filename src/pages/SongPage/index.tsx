@@ -1,11 +1,3 @@
-import Song from 'pages/SongPage/Song';
-
-const SongPage: React.FC = () => {
-  return (
-    <>
-      <Song />
-    </>
-  );
-};
+import SongPage from 'pages/SongPage/Song';
 
 export default SongPage;

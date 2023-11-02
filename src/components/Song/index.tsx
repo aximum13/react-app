@@ -129,14 +129,14 @@ const Song: React.FC<Props> = ({
   const handleDeleteSong = (id: number) => {
     dispatch(deleteSong(id));
     setIsEdit(false);
-    if (!isDetail) navigate('/react-app');
+    if (!isDetail) navigate('/songs');
   };
 
   return (
     <>
       {isDetail ? (
         <li className={classNames(styles.SongDetail)}>
-          <Link to={`songs/${id}`} className={styles.TextDetail}>
+          <Link to={`${id}`} className={styles.TextDetail}>
             {index ? index + 1 : 1}. {author} - {title}
           </Link>
 
@@ -172,7 +172,7 @@ const Song: React.FC<Props> = ({
       {!isDetail && (
         <Link
           className={classNames(song ? styles.ToHome : styles.ToHomeNotFound)}
-          to={'/react-app'}
+          to={'/songs'}
           replace
         >
           Вернуться на главную страницу
