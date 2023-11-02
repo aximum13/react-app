@@ -129,7 +129,7 @@ const Song: React.FC<Props> = ({
   const handleDeleteSong = (id: number) => {
     dispatch(deleteSong(id));
     setIsEdit(false);
-    if (!isDetail) navigate('/songs');
+    if (!isDetail) navigate('/');
   };
 
   return (
@@ -172,7 +172,7 @@ const Song: React.FC<Props> = ({
       {!isDetail && (
         <Link
           className={classNames(song ? styles.ToHome : styles.ToHomeNotFound)}
-          to={'/songs'}
+          to={'/'}
           replace
         >
           Вернуться на главную страницу
