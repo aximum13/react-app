@@ -4,9 +4,17 @@ import Song from 'components/Song';
 
 type Props = SongState & {
   index: number;
+  songs: SongState[];
 };
 
-const SongDetail = ({ id, index, author, title, linkOnYouTube }: Props) => {
+const SongDetail = ({
+  id,
+  index,
+  author,
+  title,
+  linkOnYouTube,
+  songs,
+}: Props) => {
   return (
     <Song
       isDetail={true}
@@ -15,6 +23,7 @@ const SongDetail = ({ id, index, author, title, linkOnYouTube }: Props) => {
       title={title}
       linkOnYouTube={linkOnYouTube}
       index={index}
+      songs={songs}
     />
   );
 };

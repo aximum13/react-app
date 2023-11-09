@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'hooks';
-import { deleteSong, editSong } from 'models/songs/slices/songsSlice';
+import { deleteSong } from 'models/songs/slices/songsSlice';
 import { SongState } from 'models/songs/types';
-import { errorTexts } from 'utils/errorTexts';
 
-import FormCmp from 'components/Form';
 import ModalCmp from 'components/Modal';
 import ButtonsGroup from 'components/ButtonsGroup';
 import LinkOnYouTube from 'components/LinkOnYouTube';
+import { FormEdit } from 'components/Form';
+import { Button } from 'react-bootstrap';
 
 import styles from './Song.module.scss';
 
@@ -18,6 +18,7 @@ type Props = SongState & {
   index?: number;
   isDetail?: boolean;
   song?: SongState;
+  songs: SongState[];
 };
 
 const Song: React.FC<Props> = ({
@@ -28,23 +29,10 @@ const Song: React.FC<Props> = ({
   title,
   linkOnYouTube,
   song,
+  songs,
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const [songProps, setSongProps] = useState({
-    author,
-    title,
-    linkOnYouTube,
-  });
-
-  let newErrors = {
-    errorAuthor: '',
-    errorTitle: '',
-    errorLink: '',
-  };
-
-  const [errors, setErrors] = useState(newErrors);
 
   const [isEdit, setIsEdit] = useState(false);
   const [isShow, setIsShow] = useState(false);
@@ -54,55 +42,6 @@ const Song: React.FC<Props> = ({
 
   const handleEdit = () => setIsEdit(true);
   const handleCloseEdit = () => {
-    setSongProps({
-      author,
-      title,
-      linkOnYouTube,
-    });
-    setIsEdit(false);
-  };
-
-  const handleInputChange = (e: {
-    target: { name: string; value: string };
-  }) => {
-    const { name, value } = e.target;
-    setSongProps((prevFormValues) => ({
-      ...prevFormValues,
-      [name]: value,
-    }));
-  };
-
-  const handleFormSubmit = () => {
-    newErrors = errorTexts(
-      songProps.author ? songProps.author.trim() : '',
-      songProps.title ? songProps.title.trim() : '',
-      songProps.linkOnYouTube
-    );
-    if (newErrors.errorAuthor || newErrors.errorTitle || newErrors.errorLink) {
-      return (
-        setErrors(newErrors),
-        setSongProps({
-          author: songProps.author ? songProps.author.trim() : '',
-          title: songProps.title ? songProps.title.trim() : '',
-          linkOnYouTube: songProps.linkOnYouTube
-            ? songProps.linkOnYouTube.trim()
-            : '',
-        })
-      );
-    }
-
-    dispatch(
-      editSong({
-        id: id,
-        author: songProps.author ? songProps.author.trim() : '',
-        title: songProps.title ? songProps.title.trim() : '',
-        linkOnYouTube: songProps.linkOnYouTube
-          ? songProps.linkOnYouTube.trim()
-          : '',
-      })
-    );
-
-    setErrors({ errorAuthor: '', errorTitle: '', errorLink: '' });
     setIsEdit(false);
   };
 
@@ -164,22 +103,26 @@ const Song: React.FC<Props> = ({
             author={author}
             title={title}
           />
+          <Button
+            className={'ms-auto d-block'}
+            onClick={handleCloseShow}
+            variant={'secondary'}
+          >
+            Закрыть
+          </Button>
         </ModalCmp>
       )}
 
-      <ModalCmp
-        show={isEdit}
-        isEdit={isDetail}
-        isForm={true}
-        handleClose={handleCloseEdit}
-        handleDelete={() => handleDeleteSong(id)}
-        handleSubmit={handleFormSubmit}
-      >
-        <FormCmp
-          formValues={songProps}
-          errors={errors}
-          handleInputChange={handleInputChange}
-        ></FormCmp>
+      <ModalCmp show={isEdit} handleClose={handleCloseEdit}>
+        <FormEdit
+          handleDelete={() => handleDeleteSong(id)}
+          handleClose={handleCloseEdit}
+          id={id}
+          title={title}
+          author={author}
+          linkOnYouTube={linkOnYouTube}
+          isDetail={isDetail}
+        ></FormEdit>
       </ModalCmp>
     </>
   );

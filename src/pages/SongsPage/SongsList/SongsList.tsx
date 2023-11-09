@@ -27,6 +27,7 @@ const SongsList: React.FC<Props> = ({ songQuery, songs }) => {
               author={author}
               title={title}
               linkOnYouTube={linkOnYouTube}
+              songs={songs}
             />
           ))}
       </ul>

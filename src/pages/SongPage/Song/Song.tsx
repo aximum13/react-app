@@ -18,7 +18,7 @@ const Song = () => {
 
   const { author, title, linkOnYouTube } = song
     ? song
-    : { author: '', title: '', linkOnYouTube: undefined };
+    : { author: '', title: '', linkOnYouTube: '' };
 
   return (
     <div className={styles.Container}>
@@ -30,6 +30,7 @@ const Song = () => {
         title={title}
         linkOnYouTube={linkOnYouTube}
         song={song}
+        songs={songs}
       />
     </div>
   );

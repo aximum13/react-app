@@ -1,3 +1,4 @@
-import FormCmp from './Form';
+import FormAdd from './FormAdd';
+import FormEdit from './FormEdit';
 
-export default FormCmp;
+export { FormAdd, FormEdit };

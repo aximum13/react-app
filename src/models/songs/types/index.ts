@@ -4,9 +4,9 @@ export type SongsState = {
 
 export type SongState = {
   id: number;
-  author?: string;
-  title?: string;
-  linkOnYouTube?: string;
+  author: string;
+  title: string;
+  linkOnYouTube: string;
 };
 
 export type LocalStorageState = {
