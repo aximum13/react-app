@@ -25,6 +25,23 @@ export const songsSlice = createSlice({
         state.songs[index] = getSong;
       }
     },
+
+    editSongSuccess: (state, action: PayloadAction<SongState>) => {
+      const { id, author, title, linkOnYouTube } = action.payload;
+      state.songs = state.songs.map((song: SongState) => {
+        if (song.id === id) {
+          return {
+            ...song,
+            author,
+            title,
+            linkOnYouTube,
+          };
+        }
+        return song;
+      });
+    },
+
+   
   },
 });
 
@@ -41,8 +58,20 @@ export const getSong = createAction(GET_SONG, (payload: number) => ({
   payload,
 }));
 
+export const EDIT_SONG = 'songs/editSong';
+export const editSong = createAction(EDIT_SONG, (payload: SongState) => ({
+  payload,
+}));
+
+ 
+
 const { actions, reducer } = songsSlice;
 
-export const { getSongsSuccess, addSongSuccess, getSongSuccess } = actions;
+export const {
+  getSongsSuccess,
+  addSongSuccess,
+  getSongSuccess,
+  editSongSuccess,
+} = actions;
 
 export default reducer;
