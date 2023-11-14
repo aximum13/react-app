@@ -1,5 +1,5 @@
 import { RootState } from 'store';
 
-const songs = (state: RootState) => state.list;
+const songs = (state: RootState) => state.songs;
 
-export const getSongs = songs;
+export const allSongs = songs;

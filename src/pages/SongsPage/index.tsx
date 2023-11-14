@@ -1,18 +1,25 @@
-import { useAppSelector } from 'hooks';
 import { useSearchParams } from 'react-router-dom';
-
-import { getSongs } from 'models/songs/selectors/songsSelector';
-import { isSongs } from 'utils/isSongs';
 
 import Title from 'components/Title';
 import Header from 'pages/SongsPage/Header';
 import SongsList from 'pages/SongsPage/SongsList';
 
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { isSongs } from 'utils/isSongs';
+import { allSongs } from 'models/songs/selectors/songsSelector';
+import { useEffect } from 'react';
+import { getSongs } from 'models/songs/slices/songsSlice';
+
 const SongsPage: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const songQuery = searchParams.get('song') || '';
 
-  const songs = useAppSelector(getSongs);
+  useEffect(() => {
+    dispatch(getSongs());
+  }, [dispatch]);
+
+  const songs = useAppSelector(allSongs);
 
   return (
     <>
@@ -22,6 +29,7 @@ const SongsPage: React.FC = () => {
         songQuery={songQuery}
         songs={songs}
       />
+
       {isSongs(songs) && <SongsList songQuery={songQuery} songs={songs} />}
     </>
   );

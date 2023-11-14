@@ -1,16 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { save } from 'redux-localstorage-simple';
+import createSagaMiddleware from 'redux-saga';
 
 import songReducer from 'models/songs/slices/songsSlice';
+import rootSaga from 'models/songs/sagas';
 
-const saveSong = save({
-  namespace: 'musicList',
-});
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: songReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(saveSong),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
 });
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
 
