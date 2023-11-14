@@ -41,7 +41,11 @@ export const songsSlice = createSlice({
       });
     },
 
-   
+    deleteSongSuccess: (state, action: PayloadAction<number>) => {
+      const songId = action.payload;
+      state.songs = state.songs.filter((song) => song.id !== songId);
+      return state;
+    },
   },
 });
 
@@ -63,7 +67,10 @@ export const editSong = createAction(EDIT_SONG, (payload: SongState) => ({
   payload,
 }));
 
- 
+export const DELETE_SONG = 'songs/deleteSong';
+export const deleteSong = createAction(DELETE_SONG, (payload: number) => ({
+  payload,
+}));
 
 const { actions, reducer } = songsSlice;
 
@@ -72,6 +79,7 @@ export const {
   addSongSuccess,
   getSongSuccess,
   editSongSuccess,
+  deleteSongSuccess,
 } = actions;
 
 export default reducer;

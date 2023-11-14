@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'hooks';
-import { deleteSong } from 'models/songs/slices/songsSlice';
+import { getSong, deleteSong } from 'models/songs/slices/songsSlice';
 import { SongState } from 'models/songs/types';
 
 import ModalCmp from 'components/Modal';
@@ -29,7 +29,6 @@ const Song: React.FC<Props> = ({
   title,
   linkOnYouTube,
   song,
-  songs,
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -55,7 +54,7 @@ const Song: React.FC<Props> = ({
     <>
       {isDetail ? (
         <li className={classNames(styles.SongDetail)}>
-          <Link to={`${id}`} className={styles.TextDetail}>
+          <Link className={styles.TextDetail} to={`/${id}`}>
             {index ? index + 1 : 1}. {author} - {title}
           </Link>
 
