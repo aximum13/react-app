@@ -1,58 +1,48 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { load } from 'redux-localstorage-simple';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { SongsState, SongState, LocalStorageState } from 'models/songs/types';
-
-let SONGS = load({ namespace: 'musicList' }) as LocalStorageState;
+import { SongsState, SongState } from 'models/songs/types';
 
 const initialState: SongsState = {
-  list: SONGS?.list ?? [],
+  songs: [],
 };
 
 export const songsSlice = createSlice({
   name: 'songs',
   initialState,
   reducers: {
-    addSong: (state, action: PayloadAction<SongState>) => {
-      const { id, author, title, linkOnYouTube } = action.payload;
-      const newSong: SongState = {
-        id,
-        author,
-        title,
-        linkOnYouTube,
-      };
-
-      state.list.push(newSong);
-
-      return state;
+    getSongsSuccess: (state, action) => {
+      state.songs = action.payload;
     },
 
-    editSong: (state, action: PayloadAction<SongState>) => {
-      const { id, author, title, linkOnYouTube } = action.payload;
-
-      state.list = state.list.map((song: SongState) => {
-        if (song.id === id) {
-          return {
-            ...song,
-            author,
-            title,
-            linkOnYouTube,
-          };
-        }
-        return song;
-      });
+    addSongSuccess: (state, action: PayloadAction<SongState>) => {
+      state.songs.push(action.payload);
     },
 
-    deleteSong: (state, action: PayloadAction<number>) => {
-      const songId = action.payload;
-      state.list = state.list.filter((song) => song.id !== songId);
-      return state;
+    getSongSuccess: (state, action: PayloadAction<SongState>) => {
+      const getSong = action.payload;
+      const index = state.songs.findIndex((song) => song.id === getSong.id);
+      if (index !== -1) {
+        state.songs[index] = getSong;
+      }
     },
   },
 });
 
+export const GET_SONGS = 'songs/getSongs';
+export const getSongs = createAction(GET_SONGS);
+
+export const ADD_SONG = 'songs/addSong';
+export const addSong = createAction(ADD_SONG, (payload: SongState) => ({
+  payload,
+}));
+
+export const GET_SONG = 'songs/getSong';
+export const getSong = createAction(GET_SONG, (payload: number) => ({
+  payload,
+}));
+
 const { actions, reducer } = songsSlice;
 
-export const { addSong, editSong, deleteSong } = actions;
+export const { getSongsSuccess, addSongSuccess, getSongSuccess } = actions;
 
 export default reducer;
