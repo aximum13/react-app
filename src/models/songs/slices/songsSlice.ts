@@ -4,13 +4,38 @@ import { SongsState, SongState } from 'models/songs/types';
 
 const initialState: SongsState = {
   songs: [],
+  song: undefined,
+  isDelete: false,
+  loading: false,
+  error: null,
 };
 
 export const songsSlice = createSlice({
   name: 'songs',
   initialState,
   reducers: {
+    loadSongs: (state) => {
+      state.isDelete = false;
+      state.error = null;
+      state.song = undefined;
+      state.loading = true;
+    },
+
+    endLoadSongs: (state) => {
+      state.loading = false;
+    },
+
+    showAlert: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    hideAlert: (state) => {
+      state.error = null;
+    },
+
     getSongsSuccess: (state, action) => {
+      state.error = null;
       state.songs = action.payload;
     },
 
@@ -20,10 +45,8 @@ export const songsSlice = createSlice({
 
     getSongSuccess: (state, action: PayloadAction<SongState>) => {
       const getSong = action.payload;
-      const index = state.songs.findIndex((song) => song.id === getSong.id);
-      if (index !== -1) {
-        state.songs[index] = getSong;
-      }
+      state.song = getSong;
+      state.error = null;
     },
 
     editSongSuccess: (state, action: PayloadAction<SongState>) => {
@@ -44,7 +67,7 @@ export const songsSlice = createSlice({
     deleteSongSuccess: (state, action: PayloadAction<number>) => {
       const songId = action.payload;
       state.songs = state.songs.filter((song) => song.id !== songId);
-      return state;
+      state.isDelete = true;
     },
   },
 });
@@ -75,6 +98,10 @@ export const deleteSong = createAction(DELETE_SONG, (payload: number) => ({
 const { actions, reducer } = songsSlice;
 
 export const {
+  loadSongs,
+  endLoadSongs,
+  showAlert,
+  hideAlert,
   getSongsSuccess,
   addSongSuccess,
   getSongSuccess,

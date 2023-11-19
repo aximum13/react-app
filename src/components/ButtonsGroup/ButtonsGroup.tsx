@@ -11,12 +11,14 @@ interface ButtonsGroupTypes {
   isDetail?: boolean;
   handleLeftBtn?: () => void;
   handleRightBtn?: () => void;
+  isError?: string | null;
 }
 
 const ButtonsGroup: React.FC<ButtonsGroupTypes> = ({
   isDetail,
   handleLeftBtn,
   handleRightBtn,
+  isError,
 }) => {
   return (
     <ButtonGroup>
@@ -31,6 +33,7 @@ const ButtonsGroup: React.FC<ButtonsGroupTypes> = ({
         className={classNames({ [styles.ButtonDelete]: !isDetail })}
         variant={isDetail ? 'outline-primary' : 'outline-danger'}
         onClick={handleRightBtn}
+        disabled={isError ? true : false}
       >
         {isDetail ? <FiEdit /> : <RiDeleteBin6Line />}
       </Button>

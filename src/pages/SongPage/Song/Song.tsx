@@ -2,25 +2,23 @@ import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { allSongs } from 'models/songs/selectors/songsSelector';
 
 import Single from 'components/Song';
 
 import styles from './Song.module.scss';
 import { useEffect } from 'react';
-import { getSong, getSongs } from 'models/songs/slices/songsSlice';
+import { getSong, loadSongs } from 'models/songs/slices/songsSlice';
 
 const Song = () => {
   const dispatch = useAppDispatch();
-  const songs = useAppSelector(allSongs);
+  const songs = useAppSelector((state) => state.songs);
+  const song = useAppSelector((state) => state.song);
 
   const { id } = useParams();
   const idSong = id ? parseInt(id) : 0;
 
-  const song = songs.find((song) => song.id === idSong);
-
   useEffect(() => {
-    dispatch(getSongs());
+    dispatch(loadSongs());
     dispatch(getSong(idSong));
   }, [dispatch, idSong]);
 

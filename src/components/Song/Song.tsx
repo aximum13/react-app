@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from 'hooks';
-import { getSong, deleteSong } from 'models/songs/slices/songsSlice';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { deleteSong } from 'models/songs/slices/songsSlice';
 import { SongState } from 'models/songs/types';
 
 import ModalCmp from 'components/Modal';
@@ -13,6 +13,8 @@ import { FormEdit } from 'components/Form';
 import { Button } from 'react-bootstrap';
 
 import styles from './Song.module.scss';
+import Loader from 'components/Loader';
+import Alert from 'components/Alert';
 
 type Props = SongState & {
   index?: number;
@@ -44,11 +46,22 @@ const Song: React.FC<Props> = ({
     setIsEdit(false);
   };
 
+  const loading = useAppSelector((state) => state.loading);
+  const error = useAppSelector((state) => state.error);
+  const isDelete = useAppSelector((state) => state.isDelete);
+
   const handleDeleteSong = (id: number) => {
     dispatch(deleteSong(id));
-    setIsEdit(false);
-    if (!isDetail) navigate('/');
+    isDetail && setIsEdit(false);
   };
+
+  useEffect(() => {
+    isDelete && !isDetail && navigate('/');
+  }, [isDelete, isDetail, navigate]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -65,31 +78,32 @@ const Song: React.FC<Props> = ({
           />
         </li>
       ) : song ? (
-        <div className={classNames(styles.Song)}>
-          <div className={classNames(styles.TextContainer)}>
-            <LinkOnYouTube
-              linkOnYouTube={linkOnYouTube}
-              author={author}
-              title={title}
+        <>
+          <div className={classNames(styles.Song)}>
+            <div className={classNames(styles.TextContainer)}>
+              <LinkOnYouTube
+                linkOnYouTube={linkOnYouTube}
+                author={author}
+                title={title}
+              />
+            </div>
+            <ButtonsGroup
+              isDetail={isDetail}
+              handleLeftBtn={handleEdit}
+              handleRightBtn={() => handleDeleteSong(id)}
+              isError={error}
             />
           </div>
-          <ButtonsGroup
-            isDetail={isDetail}
-            handleLeftBtn={handleEdit}
-            handleRightBtn={() => handleDeleteSong(id)}
-          />
-        </div>
-      ) : (
-        <>
-          <p className={styles.NotFound}>Не найдено. </p>
+          {error && !isDetail && <Alert text={error} />}
         </>
+      ) : (
+        error && !isDetail && <Alert text={error} />
       )}
 
       {!isDetail && (
         <Link
           className={classNames(song ? styles.ToHome : styles.ToHomeNotFound)}
           to={'/'}
-          replace
         >
           Вернуться на главную страницу
         </Link>

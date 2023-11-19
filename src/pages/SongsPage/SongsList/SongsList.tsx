@@ -5,11 +5,14 @@ import { SongsListTypes } from 'pages/SongsPage/SongsList/types';
 
 import styles from './SongsList.module.scss';
 
+
 type Props = SongsListTypes & {
   songs: SongState[];
 };
 
 const SongsList: React.FC<Props> = ({ songQuery, songs }) => {
+ 
+
   return (
     <>
       <ul className={styles.SongsList}>
