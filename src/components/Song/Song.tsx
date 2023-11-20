@@ -3,8 +3,13 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { deleteSong } from 'models/songs/slices/songsSlice';
+import { deleteSong, editSong, getSong } from 'models/songs';
 import { SongState } from 'models/songs/types';
+import {
+  loading as isLoad,
+  error as isError,
+  isDeleted,
+} from 'models/songs/selectors';
 
 import ModalCmp from 'components/Modal';
 import ButtonsGroup from 'components/ButtonsGroup';
@@ -46,9 +51,9 @@ const Song: React.FC<Props> = ({
     setIsEdit(false);
   };
 
-  const loading = useAppSelector((state) => state.loading);
-  const error = useAppSelector((state) => state.error);
-  const isDelete = useAppSelector((state) => state.isDelete);
+  const loading = useAppSelector(isLoad);
+  const error = useAppSelector(isError);
+  const isDelete = useAppSelector(isDeleted);
 
   const handleDeleteSong = (id: number) => {
     dispatch(deleteSong(id));
@@ -82,9 +87,9 @@ const Song: React.FC<Props> = ({
           <div className={classNames(styles.Song)}>
             <div className={classNames(styles.TextContainer)}>
               <LinkOnYouTube
-                linkOnYouTube={linkOnYouTube}
                 author={author}
                 title={title}
+                linkOnYouTube={linkOnYouTube}
               />
             </div>
             <ButtonsGroup

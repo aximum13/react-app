@@ -2,7 +2,7 @@ import { Formik, Form, Field, FormikHelpers } from 'formik';
 import { useState } from 'react';
 
 import { useAppDispatch } from 'hooks';
-import { addSong } from 'models/songs/slices/songsSlice';
+import { addSong } from 'models/songs';
 import { SongState } from 'models/songs/types';
 
 import { validationSchema } from 'utils/validation';

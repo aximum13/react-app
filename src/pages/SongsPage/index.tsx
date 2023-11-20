@@ -5,9 +5,13 @@ import Header from 'pages/SongsPage/Header';
 import SongsList from 'pages/SongsPage/SongsList';
 
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { allSongs } from 'models/songs/selectors/songsSelector';
+import {
+  allSongs,
+  loading as isLoad,
+  error as isError,
+} from 'models/songs/selectors';
 import { useEffect } from 'react';
-import { getSongs, loadSongs } from 'models/songs/slices/songsSlice';
+import { getSongs, loadSongs } from 'models/songs';
 
 import Loader from 'components/Loader';
 import Alert from 'components/Alert';
@@ -23,8 +27,8 @@ const SongsPage: React.FC = () => {
   }, [dispatch]);
 
   const songs = useAppSelector(allSongs);
-  const loading = useAppSelector((state) => state.loading);
-  const error = useAppSelector((state) => state.error);
+  const loading = useAppSelector(isLoad);
+  const error = useAppSelector(isError);
 
   return (
     <>

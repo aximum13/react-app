@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 
-import songReducer from 'models/songs/slices/songsSlice';
+import songReducer from 'models/songs';
 import rootSaga from 'models/songs/sagas';
 
 const sagaMiddleware = createSagaMiddleware();

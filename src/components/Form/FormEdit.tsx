@@ -1,7 +1,7 @@
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 
 import { useAppDispatch } from 'hooks';
-import { editSong } from 'models/songs/slices/songsSlice';
+import { editSong, getSong } from 'models/songs';
 import { SongState } from 'models/songs/types';
 
 import { validationSchema } from 'utils/validation';
@@ -55,6 +55,8 @@ const FormEdit: React.FC<Props> = ({
             linkOnYouTube: linkOnYouTube,
           })
         );
+
+        !isDetail && dispatch(getSong(id));
 
         setSubmitting(false);
         handleClose();

@@ -7,12 +7,13 @@ import Single from 'components/Song';
 
 import styles from './Song.module.scss';
 import { useEffect } from 'react';
-import { getSong, loadSongs } from 'models/songs/slices/songsSlice';
+import { getSong, loadSongs } from 'models/songs';
+import { allSongs, song as single } from 'models/songs/selectors';
 
 const Song = () => {
   const dispatch = useAppDispatch();
-  const songs = useAppSelector((state) => state.songs);
-  const song = useAppSelector((state) => state.song);
+  const songs = useAppSelector(allSongs);
+  const song = useAppSelector(single);
 
   const { id } = useParams();
   const idSong = id ? parseInt(id) : 0;
